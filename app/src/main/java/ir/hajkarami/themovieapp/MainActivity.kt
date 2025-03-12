@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
-        movieAdapter = MovieAdapter(this, movies)
+        movieAdapter = MovieAdapter(movies)
         binding.recyclerview.apply {
             itemAnimator = DefaultItemAnimator()
             adapter = movieAdapter

@@ -6,14 +6,10 @@ import androidx.lifecycle.LiveData
 import ir.hajkarami.themovieapp.model.Movie
 import ir.hajkarami.themovieapp.model.MovieRepository
 
-class MainActivityViewModel(
-    application: Application
-) :
-    AndroidViewModel(application) {
+class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
+
     private val repository: MovieRepository = MovieRepository(application)
+    private val moviesLiveData: LiveData<List<Movie>> = repository.getMutableLiveData()
 
-    fun getAllMovies(): LiveData<List<Movie>> {
-        return repository.getMutableLiveData()
-    }
-
+    fun getAllMovies(): LiveData<List<Movie>> = moviesLiveData
 }

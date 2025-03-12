@@ -1,6 +1,5 @@
 package ir.hajkarami.themovieapp.view
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,13 +8,10 @@ import ir.hajkarami.themovieapp.R
 import ir.hajkarami.themovieapp.databinding.MovieListItemBinding
 import ir.hajkarami.themovieapp.model.Movie
 
-class MovieAdapter(val context: Context, val movieArrayList: ArrayList<Movie>) :
+class MovieAdapter(private var movieList: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding: MovieListItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.movie_list_item, parent, false
@@ -23,22 +19,28 @@ class MovieAdapter(val context: Context, val movieArrayList: ArrayList<Movie>) :
         return MovieViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: MovieViewHolder,
-        position: Int
-    ) {
-        val movie : Movie = movieArrayList[position]
-        holder.movieListItemBinding.movie = movie
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        holder.bind(movieList[position])
     }
 
-    override fun getItemCount(): Int = movieArrayList.size
+    override fun getItemCount(): Int = movieList.size
 
-    inner class MovieViewHolder(val movieListItemBinding: MovieListItemBinding) :
-        RecyclerView.ViewHolder(movieListItemBinding.root) {
-            init {
-                movieListItemBinding.root.setOnClickListener {
+    fun updateData(newMovies: List<Movie>) {
+        movieList = newMovies
+        notifyDataSetChanged()
+    }
 
-                }
+    inner class MovieViewHolder(private val binding: MovieListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(movie: Movie) {
+            binding.movie = movie
+            binding.executePendingBindings()
+        }
+
+        init {
+            binding.root.setOnClickListener {
             }
+        }
     }
 }
