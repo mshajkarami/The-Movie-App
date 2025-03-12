@@ -1,24 +1,63 @@
 package ir.hajkarami.themovieapp.model
-
+import android.widget.ImageView
+import androidx.databinding.BaseObservable
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
-    val id: Int,
-    val title: String,
+class Movie : BaseObservable() {
+
+    @SerializedName("id")
+    @Expose
+    var id: Int? = null
+        set(value) {
+            field = value
+        }
+
+    @SerializedName("title")
+    @Expose
+    var title: String? = null
+        set(value) {
+            field = value
+        }
+
     @SerializedName("poster_path")
     @Expose
-    val posterPath: String?,
-    @SerializedName("overview")
-    @Expose
-    val overview: String,
+    var posterPath: String? = null
+        set(value) {
+            field = value
+        }
+
     @SerializedName("release_date")
     @Expose
-    val releaseDate: String?,
+    var releaseDate: String? = null
+        set(value) {
+            field = value
+        }
+
+    @SerializedName("overview")
+    @Expose
+    var overview: String? = null
+        set(value) {
+            field = value
+        }
+
     @SerializedName("vote_average")
     @Expose
-    val voteAverage: Float,
-    @Expose
-    val popularity: Float,
-    val adult: Boolean
-)
+    var voteAverage: Double? = null
+        set(value) {
+            field = value
+        }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("posterPath")
+        fun loadImage(imageView: ImageView, imageUrl: String?) {
+            val imagePath = "https://image.tmdb.org/t/p/w500/$imageUrl"
+            Glide.with(imageView.context)
+                .load(imagePath)
+                .into(imageView)
+        }
+    }
+}
