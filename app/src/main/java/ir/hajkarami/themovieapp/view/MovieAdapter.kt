@@ -1,11 +1,11 @@
-package ir.hajkarami.themovieapp
+package ir.hajkarami.themovieapp.view
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import ir.hajkarami.themovieapp.R
 import ir.hajkarami.themovieapp.databinding.MovieListItemBinding
 import ir.hajkarami.themovieapp.model.Movie
 
