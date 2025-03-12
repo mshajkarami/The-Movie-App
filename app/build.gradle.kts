@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -40,6 +43,10 @@ dependencies {
     // add Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // add swipeRefresh
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
